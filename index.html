@@ -4,18 +4,28 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mendoza-Mingorance Store</title>
+        <link rel="stylesheet" href="./styles/index.css" />
     </head>
-    <body>
-        Posiblemente 
+    <body class="container">
         <header>
-            <div>logo</div>
+            <div class="logo-header">
+                <img src="./assets/logo-min.png" alt="Logo" class="logo-header-img" />
+                <div class="logo-header-info">
+                    <p>Desarrollado por:</p>
+                    <p>Facundo Mingorance</p>
+                    <p>Brayan Mendoza</p>
+                </div>
+            </div>
             <nav>???</nav>
             <label class="switch">
-                <input type="checkbox" id="theme_dark">
-                <span class="turn-on-off"></span>
+                <input type="checkbox" id="theme_dark" />
+                <span class="turn-on-off" ><i class="icon" id="theme_icon">🌙</i></span>
             </label>
         </header>
         <main>content</main>
-        <footer>foot</footer>
+        <footer class="footer">
+            <p>Mendoza-Mingorance Store &copy; 2025 - Sistema de Autoservicio</p>
+        </footer>
+        <script src="./js/theme.js"></script>
     </body>
 </html>
