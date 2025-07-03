@@ -14,7 +14,7 @@
 ### 📲 Funcionalidades
 
 - [ ] Responsive (PC y móvil)
-- [ ] Cambiar entre temas claro/oscuro y mantener en reload
+- [X] Cambiar entre temas claro/oscuro y mantener en reload
 - [ ] Redirección con botón al login admin
 - [ ] Productos paginados
 - [ ] Descargar ticket como PDF
