@@ -99,11 +99,11 @@ header {
     font-size: 1.2rem;
     top: 0;
     left: 0;
-    transition: transform 0.4s;
+    transition: transform 0.4s ease;
 }
 
 input:checked + .turn-on-off .icon {
-  transform: translateX(30px);
+  transform: translateX(30px) rotateX(180deg);
 }
 
 footer{
