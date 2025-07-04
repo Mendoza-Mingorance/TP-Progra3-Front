@@ -9,5 +9,8 @@ const init = () => {
     if (path.includes('index.html') || path === '/' || path.endsWith('index')) {
         welcomeFunction();
     }
+    if (path.includes('products.html')) {
+        
+    }
 };
 init();
