@@ -1,7 +1,9 @@
-import { showToast } from './utils.js';
+import { uploadDataLocalStorage } from '../utils/localstorage.js';
+import { showToast } from '../utils/toast.js';
 
 const formWelcome = document.getElementById('welcome-form');
 const customerName = document.getElementById('customer-name');
+
 export const welcomeFunction = () => {
     if (localStorage.getItem('customerName')) {
         window.location.href = './products.html';
@@ -32,9 +34,9 @@ export const welcomeFunction = () => {
         const form = e.target;
 
         if (name.length < 3) return showToast('Nombre minimo de 3 caracteres', 'error', form);
-        if (name.length > 50) return showToast('Nombre demasiado largo', 'error', form);
+        if (name.length >= 20) return showToast('Nombre demasiado largo', 'error', form);
 
-        localStorage.setItem('customerName', name);
+        uploadDataLocalStorage('customerName', name);
         showToast(`¡Bienvenido/a ${name}`, 'success', form);
 
         setTimeout(() => (window.location.href = './products.html'), 5000);
