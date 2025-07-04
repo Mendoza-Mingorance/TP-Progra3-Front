@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+export const darkTheme = () => {
     const changeThemeCheck = document.getElementById('theme_dark');
     const changeThemeIcon = document.getElementById('theme_icon');
 
@@ -22,4 +22,4 @@ document.addEventListener('DOMContentLoaded', () => {
     function putIcon(tema) {
         changeThemeIcon.textContent = tema === 'dark' ? '☀️' : '🌙';
     }
-});
+};

@@ -1,8 +1,13 @@
-const themeDark = document.getElementById("theme_dark");
-themeDark.addEventListener("change", () => {
-    document.body.classList.toggle("theme_dark")
-})
+import { darkTheme } from './theme.js';
+import { welcomeFunction } from './welcome.js';
 
-const init = ()=>{
-    console.log("Inicializa las funciones");    
-}
+const init = () => {
+    console.log('Inicializa las funciones');
+    darkTheme();
+
+    const path = window.location.pathname;
+    if (path.includes('index.html') || path === '/' || path.endsWith('index')) {
+        welcomeFunction();
+    }
+};
+init();
