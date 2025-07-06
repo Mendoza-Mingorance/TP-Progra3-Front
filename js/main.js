@@ -1,5 +1,5 @@
 import { getCart, showCart, updateCartCount } from "./components/cart.js";
-import { showCheckout } from "./components/checkout.js";
+import { confirmPurchase, showCheckout } from "./components/checkout.js";
 import { fetchProducts, initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
 import { categoriesData } from "./data/data.js";
@@ -35,6 +35,7 @@ const init = async () => {
 
     if (path.includes('checkout.html')) {
         showCheckout(getCart());
+        confirmPurchase(customerName, getCart());
     }
 };
 

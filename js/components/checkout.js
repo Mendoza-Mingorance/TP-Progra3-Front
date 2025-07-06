@@ -1,3 +1,5 @@
+import { API_URL } from "../../config/config.js";
+
 export const showCheckout = (cart) => {
     const productContainer = document.getElementById('product-summary');
     const totalPriceEl = document.getElementById('total-price');
@@ -30,3 +32,42 @@ export const showCheckout = (cart) => {
 
     totalPriceEl.innerHTML = `<span>Total: $${total.toFixed(2)}</span>`;
 };
+
+export function confirmPurchase(customerName, cart) {
+    const confirmPurchaseBtn = document.getElementById('confirmPurchase');
+    if (!confirmPurchaseBtn) return;
+
+    confirmPurchaseBtn.addEventListener('click', async () => {
+    
+        const paymentMethod = document.getElementById('paymentMethod').value;
+        console.log(paymentMethod);
+    
+        try {
+            const res = await fetch(`${API_URL}/api/sales`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: customerName,
+                    payment_method: paymentMethod,
+                    products: cart
+                })
+            });
+    
+            const saleData = await res.json();
+            
+            if (res.ok) {
+                console.log('Venta confirmada:', saleData);
+                localStorage.removeItem('cart');
+            } else {
+                throw new Error(saleData.message || 'Error al procesar la venta');
+            }
+        } catch (error) {
+            console.error('Error al confirmar la compra:', error);
+            alert('Ocurrió un error al confirmar la compra');
+        }
+    });
+}
+
+
