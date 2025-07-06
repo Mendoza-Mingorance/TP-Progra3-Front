@@ -1,9 +1,7 @@
+import { API_URL } from '../../config/config.js';
 import { categoriesData, productsData } from '../data/data.js';
-import { showToast } from '../utils/toast.js';
 import { addProductToCart } from './cart.js';
 
-
-const API_URL = 'http://localhost:8080';
 export function showNameCustomer(name) {
     let navbarDiv = document.querySelector('.header-customer-name');
     if (navbarDiv) {
@@ -27,7 +25,16 @@ export function renderDropdownCategories(categories) {
     });
 }
 
-export async function fetchAndShowProducts() {
+export async function fetchAllProducts() {
+    try {
+        const res = await fetch(`${API_URL}/api/products`);
+        const products = await res.json();
+        return products.data;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+}
+export async function fetchProducts() {
     const category = document.getElementById('categorySelect').value;
     const minPrice = document.getElementById('minPrice').value;
     const maxPrice = document.getElementById('maxPrice').value;
@@ -48,8 +55,10 @@ export async function fetchAndShowProducts() {
     try {
         const res = await fetch(url);
         const products = await res.json();
+        console.log(products);
+        console.log(products.data);
         
-        showProducts(products.data);
+        return products.data
     } catch (err) {
         console.error('Error:', err);
     }
