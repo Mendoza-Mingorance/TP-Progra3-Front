@@ -69,7 +69,8 @@ export function confirmPurchase(customerName, cart) {
                 modal.classList.remove('hidden');
 
                 finishBtn.addEventListener('click', () => {
-                    window.location.href = '/products.html';
+                    localStorage.removeItem('customerName');
+                    window.location.href = '/index.html';
                 });
 
             } else {
