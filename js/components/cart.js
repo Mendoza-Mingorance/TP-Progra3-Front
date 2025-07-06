@@ -69,20 +69,27 @@ export function showCart(cart) {
         const subtotal = Number(product.price) * product.quantity;
         total += subtotal;
 
-        const productEl = document.createElement('div');
-        productEl.classList.add('cart-item');
+        const productContainer = document.createElement('div');
+        productContainer.classList.add('cart-item');
 
-        productEl.innerHTML = `
+        productContainer.innerHTML = `
             <img src="${API_URL}/uploads/${product.url_image}" alt="${product.name}" class="cart-item-image" />
             <div class="cart-item-details">
                 <h3>${product.name}</h3>
-                <p>Precio por unidad: $${Number(product.price).toFixed(2)}</p>
-                <p>Cantidad: ${product.quantity}</p>
+                <p>Precio: $${Number(product.price).toFixed(2)}</p>
+                <div class="cart-qty">
+                    <button class="qty-btn minus" data-id="${product.id}"><i class="fa-solid fa-minus"></i></button>
+                    <span class="qty">${product.quantity}</span>
+                    <button class="qty-btn plus" data-id="${product.id}"><i class="fa-solid fa-plus"></i></button>
+                </div>
                 <p>Subtotal: $${subtotal.toFixed(2)}</p>
             </div>
+            <button class="delete-btn" data-id="${product.id}">
+                <i class="fa-solid fa-trash"></i>
+            </button>
         `;
 
-        cartItemsContainer.appendChild(productEl);
+        cartItemsContainer.appendChild(productContainer);
     });
 
     cartTotalContainer.innerHTML = `
@@ -99,5 +106,42 @@ export function showCart(cart) {
         showCart(getCart());
         showToast('Carrito vaciado', 'info');
     });
+
 }
 
+const cartItemsContainer = document.querySelector('.cart-items');
+
+if (cartItemsContainer) {
+    cartItemsContainer.addEventListener('click', e => {
+        const id = Number(e.target.closest('[data-id]')?.dataset.id);
+        if (!id) return;
+
+        if (e.target.closest('.plus')) changeProductQuantity(id, +1);
+        if (e.target.closest('.minus')) changeProductQuantity(id, -1);
+        if (e.target.closest('.delete-btn')) removeProductFromCart(id);
+    });
+}
+
+function removeProductFromCart(id) {
+    cart = cart.filter(p => p.id !== id);
+    uploadDataLocalStorage('cart', cart);
+    updateCartCount();
+    showCart(cart);
+    showToast('Producto eliminado', 'info');
+}
+
+function changeProductQuantity(id, delta) {
+    const product = cart.find(p => p.id === id);
+    if (!product) return;
+
+    product.quantity += delta;
+
+    if (product.quantity <= 0) {
+        removeProductFromCart(id);
+        return;
+    }
+
+    uploadDataLocalStorage('cart', cart);
+    updateCartCount();
+    showCart(cart);
+}
