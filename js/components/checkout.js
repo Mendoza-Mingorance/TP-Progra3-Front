@@ -60,6 +60,18 @@ export function confirmPurchase(customerName, cart) {
             if (res.ok) {
                 console.log('Venta confirmada:', saleData);
                 localStorage.removeItem('cart');
+                
+                const modal = document.getElementById('modal-confirmation');
+                const ticketText = document.getElementById('ticket-number');
+                const finishBtn = document.getElementById('finish-btn');
+
+                ticketText.textContent = `Número de ticket: ${saleData.ticket}`;
+                modal.classList.remove('hidden');
+
+                finishBtn.addEventListener('click', () => {
+                    window.location.href = '/products.html';
+                });
+
             } else {
                 throw new Error(saleData.message || 'Error al procesar la venta');
             }
