@@ -61,6 +61,7 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    font-size: 22px;
 }
 
 .logo-header {
@@ -71,6 +72,21 @@ header {
 }
 .logo-header-img {
     width: 60px;
+}
+
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+}
+
+nav ul li {
+    list-style: none;
+}
+nav ul li a{
+    text-decoration: none;
+    color: var(--text-color);
 }
 
 .switch {

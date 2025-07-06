@@ -27,7 +27,16 @@ export function renderDropdownCategories(categories) {
     });
 }
 
-export async function fetchAndShowProducts() {
+export async function fetchAllProducts() {
+    try {
+        const res = await fetch(`${API_URL}/api/products`);
+        const products = await res.json();
+        return products.data;
+    } catch (err) {
+        console.error('Error:', err);
+    }
+}
+export async function fetchProducts() {
     const category = document.getElementById('categorySelect').value;
     const minPrice = document.getElementById('minPrice').value;
     const maxPrice = document.getElementById('maxPrice').value;
@@ -48,8 +57,10 @@ export async function fetchAndShowProducts() {
     try {
         const res = await fetch(url);
         const products = await res.json();
+        console.log(products);
+        console.log(products.data);
         
-        showProducts(products.data);
+        return products.data
     } catch (err) {
         console.error('Error:', err);
     }

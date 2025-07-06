@@ -1,29 +1,36 @@
-import { updateCartCount } from "./components/cart.js";
-import { fetchAndShowProducts, initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
+import { getCart, showCart, updateCartCount } from "./components/cart.js";
+import { fetchProducts, initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
-import { categoriesData, /*productsData*/ } from "./data/data.js";
+import { categoriesData } from "./data/data.js";
 import { getDataLocalStorage } from "./utils/localstorage.js";
 import { darkTheme } from "./utils/theme.js";
 
-
-const init = () => {
+const init = async () => {
     console.log('Inicializa las funciones');
-    darkTheme();
-    
-    const path = window.location.pathname;
-    const customerName = getDataLocalStorage('customerName');
 
+    darkTheme();
+
+    const customerName = getDataLocalStorage('customerName');
+    showNameCustomer(customerName);
+
+    const path = window.location.pathname;
+    
     if (path.includes('index.html') || path === '/' || path.endsWith('index')) {
         welcomeFunction();
     }
+    
     if (path.includes('products.html')) {
-        showNameCustomer(customerName);
+        const products = await fetchProducts();
         renderDropdownCategories(categoriesData);
-        fetchAndShowProducts();
-        // showProducts(productsData)
-        initProducts()
-        updateCartCount()
+        showProducts(products);
+        initProducts();
+        updateCartCount();
+    }
+
+    if (path.includes('cart.html')) {
+        updateCartCount();
+        showCart(getCart()); 
     }
 };
 
-document.addEventListener('DOMContentLoaded', init);
+init();
