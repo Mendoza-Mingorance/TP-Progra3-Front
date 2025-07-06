@@ -42,12 +42,12 @@
 .cart-item-details h3 {
     margin: 0 0 0.5rem;
     font-size: 1.1rem;
-    color: #fff;
+    color: var(--text-color);
 }
 
 .cart-item-details p {
     margin: 0.2rem 0;
-    color: #fff;
+    color: var(--text-muted);
 }
 
 .cart-total {
