@@ -2,6 +2,8 @@ import { categoriesData, productsData } from '../data/data.js';
 import { showToast } from '../utils/toast.js';
 import { addProductToCart } from './cart.js';
 
+
+const API_URL = 'http://localhost:8080';
 export function showNameCustomer(name) {
     let navbarDiv = document.querySelector('.header-customer-name');
     if (navbarDiv) {
@@ -25,31 +27,33 @@ export function renderDropdownCategories(categories) {
     });
 }
 
-// async function fetchAndShowProducts() {
-//     const category = document.getElementById('categorySelect').value;
-//     const minPrice = document.getElementById('minPrice').value;
-//     const maxPrice = document.getElementById('maxPrice').value;
-//     const sort = document.getElementById('sortSelect').value;
-//     const order = document.getElementById('orderSelect').value;
+export async function fetchAndShowProducts() {
+    const category = document.getElementById('categorySelect').value;
+    const minPrice = document.getElementById('minPrice').value;
+    const maxPrice = document.getElementById('maxPrice').value;
+    const sort = document.getElementById('sortSelect').value;
+    const order = document.getElementById('orderSelect').value;
 
-//     const queryParams = new URLSearchParams();
+    const queryParams = new URLSearchParams();
+    queryParams.append('available', 'active');
+    if (category) queryParams.append('id_category', category);
+    if (minPrice) queryParams.append('minPrice', minPrice);
+    if (maxPrice) queryParams.append('maxPrice', maxPrice);
+    if (sort) queryParams.append('sort', sort);
+    if (order) queryParams.append('order', order);
 
-//     if (category) queryParams.append('id_category', category);
-//     if (minPrice) queryParams.append('minPrice', minPrice);
-//     if (maxPrice) queryParams.append('maxPrice', maxPrice);
-//     if (sort) queryParams.append('sort', sort);
-//     if (order) queryParams.append('order', order);
-
-//     const url = `/products?${queryParams.toString()}`;
-
-//     try {
-//         const res = await fetch(url);
-//         const data = await res.json();
-//         showProducts(data);
-//     } catch (err) {
-//         console.error('Error:', err);
-//     }
-// }
+    const url = `${API_URL}/api/products?${queryParams.toString()}`;
+    console.log(url);
+    
+    try {
+        const res = await fetch(url);
+        const products = await res.json();
+        
+        showProducts(products.data);
+    } catch (err) {
+        console.error('Error:', err);
+    }
+}
 
 export function showProducts(arr) {
     let container = document.querySelector('.container-products');
@@ -69,7 +73,7 @@ export function showProducts(arr) {
         let listProducts = document.createElement('div');
         listProducts.className = 'card-product';
         listProducts.innerHTML = `
-            <img src="${p.url_image}" alt="${p.name}">
+            <img src="${API_URL}/uploads/${p.url_image}" alt="${p.name}">
             <h3>${p.name}</h3>
             <p><i class="fas fa-dollar-sign"></i> ${p.price}</p>
             <p><i class="fas fa-tag"></i> ${categoryName}</p>
