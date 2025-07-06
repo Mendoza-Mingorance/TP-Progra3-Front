@@ -1,7 +1,7 @@
 import { updateCartCount } from "./components/cart.js";
-import { initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
+import { fetchAndShowProducts, initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
-import { categoriesData, productsData } from "./data/data.js";
+import { categoriesData, /*productsData*/ } from "./data/data.js";
 import { getDataLocalStorage } from "./utils/localstorage.js";
 import { darkTheme } from "./utils/theme.js";
 
@@ -19,7 +19,8 @@ const init = () => {
     if (path.includes('products.html')) {
         showNameCustomer(customerName);
         renderDropdownCategories(categoriesData);
-        showProducts(productsData)
+        fetchAndShowProducts();
+        // showProducts(productsData)
         initProducts()
         updateCartCount()
     }

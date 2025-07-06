@@ -1,3 +1,18 @@
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    padding: 0;
+}
+
+nav ul li {
+    list-style: none;
+}
+
+header{
+    font-size: 22px;
+}
+
 .products-section {
     display: flex;
     width: 100%;
