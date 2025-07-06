@@ -2,9 +2,9 @@
 import { fetchAllProducts } from './products.js';
 import { getDataLocalStorage, uploadDataLocalStorage } from '../utils/localstorage.js';
 import { showToast } from '../utils/toast.js';
+import { API_URL } from '../../config/config.js';
 
 let cart = getDataLocalStorage('cart') || [];
-const API_URL = 'http://localhost:8080';
 export async function addProductToCart(id) {
     const products = await fetchAllProducts()
     const product = products.find(p => p.id === id);

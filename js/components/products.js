@@ -1,9 +1,7 @@
+import { API_URL } from '../../config/config.js';
 import { categoriesData, productsData } from '../data/data.js';
-import { showToast } from '../utils/toast.js';
 import { addProductToCart } from './cart.js';
 
-
-const API_URL = 'http://localhost:8080';
 export function showNameCustomer(name) {
     let navbarDiv = document.querySelector('.header-customer-name');
     if (navbarDiv) {
