@@ -1,4 +1,5 @@
 import { getCart, showCart, updateCartCount } from "./components/cart.js";
+import { showCheckout } from "./components/checkout.js";
 import { fetchProducts, initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
 import { categoriesData } from "./data/data.js";
@@ -12,6 +13,7 @@ const init = async () => {
 
     const customerName = getDataLocalStorage('customerName');
     showNameCustomer(customerName);
+    updateCartCount();
 
     const path = window.location.pathname;
     
@@ -24,12 +26,15 @@ const init = async () => {
         renderDropdownCategories(categoriesData);
         showProducts(products);
         initProducts();
-        updateCartCount();
+        
     }
 
     if (path.includes('cart.html')) {
-        updateCartCount();
         showCart(getCart()); 
+    }
+
+    if (path.includes('checkout.html')) {
+        showCheckout(getCart());
     }
 };
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mendoza-Mingorance Store</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            integrity="sha512-..."
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
+        <link rel="stylesheet" href="./styles/index.css" />
+        <link rel="stylesheet" href="./styles/checkout.css" />
+        <script type="module" src="./js/main.js" defer></script>
+    </head>
+    <body class="container">
+        <header>
+            <div class="logo-header">
+                <img src="./assets/logo-min.png" alt="Logo" class="logo-header-img" />
+                <div class="header-customer-name"></div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/products.html">Productos</a></li>
+                    <li><a href="/cart.html">Carrito</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-btns">
+                <label class="switch">
+                    <input type="checkbox" id="theme_dark" />
+                    <span class="turn-on-off"><i class="icon" id="theme_icon">🌙</i></span>
+                </label>
+                <div class="cart">
+                    <button id="cart-btn" onclick="abrirCarrito()">🛒</button>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div id="checkout-container">
+                <h2>Checkout</h2>
+                
+                <div class="purchaseInfo-container">
+                    <div>
+                        <label for="paymentMethod">Método de pago:</label>
+                        <select id="paymentMethod">
+                            <option value="cash">Efectivo</option>
+                            <option value="credit_card">Tarjeta de Crédito</option>
+                            <option value="debit_card">Tarjeta de Débito</option>
+                            <option value="transfer">Transferencia</option>
+                        </select>
+                    </div>
+                    <div id="total-price"></div>
+                </div>
+                
+                <div id="product-summary"></div>
+                <div class="purchaseBtnContainer">
+                    <button id="confirmPurchase">Confirmar Compra</button>
+                </div>
+            </div>
+
+        </main>
+        <footer class="footer">
+            <p>Mendoza-Mingorance Store &copy; 2025 - Sistema de Autoservicio</p>
+            <div class="footer-info">
+                <p>Desarrollado por:</p>
+                <p>Facundo Mingorance</p>
+                <p>Brayan Mendoza</p>
+            </div>
+        </footer>
+    </body>
+</html>

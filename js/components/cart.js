@@ -96,7 +96,7 @@ export function showCart(cart) {
         <h3>Total de la compra: $${total.toFixed(2)}</h3>
         <div class="cart-buttons">
             <button class="clear-cart-btn">Vaciar carrito</button>
-            <button class="buy-btn">Comprar</button>
+            <button class="buy-btn"><a href="/checkout.html">Comprar</a></button>
         </div>
     `;
 
