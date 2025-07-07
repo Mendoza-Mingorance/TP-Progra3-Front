@@ -232,6 +232,12 @@ footer {
 
     header {
         padding: 1rem;
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .header-customer-name{
+        display: none;
     }
 
     footer {

@@ -43,6 +43,13 @@ export function getCart() {
     return cart;
 }
 
+export function openCart(){
+    const cartBtn = document.getElementById('cart-btn')
+    cartBtn.addEventListener('click',()=>{
+        window.location.href = './cart.html'
+    })
+}
+
 export function clearCart() {
     cart = [];
     uploadDataLocalStorage('cart', cart);
