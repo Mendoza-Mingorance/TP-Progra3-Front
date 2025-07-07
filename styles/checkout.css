@@ -39,7 +39,7 @@
 }
 
 .checkout-item span {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 #total-price {
@@ -47,7 +47,7 @@
     margin: 0 auto;
     text-align: right;
     padding: 20px;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
