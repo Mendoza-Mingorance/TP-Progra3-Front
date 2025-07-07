@@ -85,7 +85,7 @@ export function showProducts(arr) {
             <img src="${API_URL}/uploads/${p.url_image}" alt="${p.name}">
             <h3>${p.name}</h3>
             <p><i class="fas fa-dollar-sign"></i> ${p.price}</p>
-            <p><i class="fas fa-tag"></i> ${p.categoryName}</p>
+            <p><i class="fas fa-tag"></i> ${p.category_name}</p>
             <button class="btn btn-add-to-cart">
             <i class="fas fa-cart-plus"></i>
             </button>

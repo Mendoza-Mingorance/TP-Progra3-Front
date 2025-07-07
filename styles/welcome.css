@@ -106,7 +106,7 @@
 }
 
 .welcome-form-input input:focus {
-   outline: none;
+    outline: none;
     border: 2px solid var(--bg-alter-color);
     background-color: rgba(var(--card-color),0.8);
     color: var(--text-colo);
