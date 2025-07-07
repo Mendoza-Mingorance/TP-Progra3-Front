@@ -68,6 +68,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    transition: transform 0.3s ease;
+}
+
+.card-product:hover {
+    transform: scale(1.05);
 }
 
 .card-product img {
