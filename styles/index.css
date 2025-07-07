@@ -213,6 +213,13 @@ footer {
     left: 100%;
 }
 
+.logoutBtn{
+    background-color: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
 @media (max-width: 768px) {
     .welcome-container {
         margin: 1rem;

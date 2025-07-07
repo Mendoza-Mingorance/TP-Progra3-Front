@@ -39,6 +39,6 @@ export const welcomeFunction = () => {
         uploadDataLocalStorage('customerName', name);
         showToast(`¡Bienvenido/a ${name}`, 'success', form);
 
-        setTimeout(() => (window.location.href = './products.html'), 5000);
+        setTimeout(() => (window.location.href = './products.html'), 2000);
     }
 };
