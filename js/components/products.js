@@ -76,8 +76,8 @@ export function showProducts(arr) {
 
     for (let i = 0; i < arr.length; i++) {
         const p = arr[i];
-        let categories = categoriesData.find(c => c.id === p.id_category);
-        let categoryName = categories ? categories.name : 'Sin Categoria';
+        // let categories = categoriesData.find(c => c.id === p.id_category);
+        // let categoryName = categories ? categories.name : 'Sin Categoria'; --> estas lineas ya las podemos borrar ya que no estamos usando los productos hardcodeados. Ante la duda las dejo comentadas por si te rompe algo, pero por como tenemos armada la base, con ${p.category_name} obtenemos la categoría de cada producto desde la base de datos(mas abajo hago esa modificacion). Si ya es asi, tambien podriamos borrar la carpeta data directamente. 
 
         let listProducts = document.createElement('div');
         listProducts.className = 'card-product';
@@ -85,7 +85,7 @@ export function showProducts(arr) {
             <img src="${API_URL}/uploads/${p.url_image}" alt="${p.name}">
             <h3>${p.name}</h3>
             <p><i class="fas fa-dollar-sign"></i> ${p.price}</p>
-            <p><i class="fas fa-tag"></i> ${categoryName}</p>
+            <p><i class="fas fa-tag"></i> ${p.categoryName}</p>
             <button class="btn btn-add-to-cart">
             <i class="fas fa-cart-plus"></i>
             </button>
