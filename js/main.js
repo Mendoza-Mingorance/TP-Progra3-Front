@@ -1,6 +1,6 @@
 import { getCart, showCart, updateCartCount } from "./components/cart.js";
 import { confirmPurchase, showCheckout } from "./components/checkout.js";
-import { fetchProducts, initProducts, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
+import { fetchProducts, initProducts, logout, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
 import { categoriesData } from "./data/data.js";
 import { getDataLocalStorage } from "./utils/localstorage.js";
@@ -10,10 +10,10 @@ const init = async () => {
     console.log('Inicializa las funciones');
 
     darkTheme();
-
     const customerName = getDataLocalStorage('customerName');
     showNameCustomer(customerName);
     updateCartCount();
+    logout();
 
     const path = window.location.pathname;
     

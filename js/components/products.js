@@ -112,3 +112,14 @@ export function initProducts() {
         });
     }
 }
+
+export function logout() {
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('cart');
+            localStorage.removeItem('customerName');
+            window.location.href = '/index.html';
+        });
+    }    
+}
