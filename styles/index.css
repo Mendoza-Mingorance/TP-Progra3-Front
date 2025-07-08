@@ -57,6 +57,7 @@ body {
     position: relative;
 }
 main {
+    margin-top: 100px;
     flex: 1;
     padding: 1rem;
 }
@@ -65,11 +66,14 @@ header {
     background-color: rgba(var(--card-color), 0.7);
     padding: 1rem 2rem;
     box-shadow: var(--shadow);
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
+    z-index: 1;
     font-size: 1.375rem;
 }
 
