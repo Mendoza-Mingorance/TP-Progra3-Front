@@ -1,4 +1,4 @@
-// import { productsData } from '../data/data.js';
+
 import { fetchAllProducts } from './products.js';
 import { getDataLocalStorage, uploadDataLocalStorage } from '../utils/localstorage.js';
 import { showToast } from '../utils/toast.js';
