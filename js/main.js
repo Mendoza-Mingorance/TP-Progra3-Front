@@ -14,7 +14,7 @@ const init = async () => {
     showNameCustomer(customerName);
     updateCartCount();
     logout();
-    openCart();
+    
 
     const path = window.location.pathname;
     
@@ -26,16 +26,19 @@ const init = async () => {
         const products = await fetchProducts();
         renderDropdownCategories(categoriesData);
         showProducts(products);
+        openCart();
         searchProducts(products);
-        // initProducts();
+        initProducts();
         
     }
 
     if (path.includes('cart.html')) {
+        openCart();
         showCart(getCart()); 
     }
 
     if (path.includes('checkout.html')) {
+        openCart();
         showCheckout(getCart());
         confirmPurchase(customerName, getCart());
     }
