@@ -1,5 +1,4 @@
-
-.main-container h1{
+.main-container {
     text-align: center;
 }
 
@@ -12,7 +11,7 @@
     gap: 2rem;
 }
 #products-filters {
-    background-color: rgba(var(--card-color), 0.7);
+    background-color: rgba(var(--card-color), 0.38);
     backdrop-filter: blur(4px);
     padding: 1rem;
     gap: 1rem;
@@ -23,23 +22,71 @@
     flex-wrap: wrap;
     align-items: center;
     align-content: center;
+    position: sticky;
+    height: fit-content;
+    transition: all 0.3s ease;
+}
+
+#products-filters:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+#products-filters h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    text-align: center;
+    position: relative;
 }
 
 .filters {
     display: flex;
     flex-direction: column;
-    width: 200px;
-    min-width: 180px;
-    gap: 0.5rem;
-    font-size: 1rem;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
+.filters input,
 .filters select {
     width: 100%;
+    padding: 0.75rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    background-color: rgba(var(--card-color));
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    outline: none;
 }
 
-.filters input {
-    width: 97%;
+.filters input:focus,
+.filters select:focus {
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+#searchInput {
+    width: 50%;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    border: 2px solid transparent;
+    background-color: rgba(var(--card-color));
+    color: var(--text-color);
+}
+
+#searchInput:hover {
+    border-color: var(--color-secondary);
+    box-shadow: var(--shadow);
+}
+
+#searchInput:focus {
+    border-color: var(--color-secondary);
+    outline: none;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
 }
 
 .container-products {
@@ -133,7 +180,6 @@
 }
 
 @media (max-width: 768px) {
-   
     .products-section {
         flex-direction: column;
     }
@@ -145,8 +191,6 @@
         flex-wrap: wrap;
         justify-content: center;
     }
-
-    
 
     .container-products {
         justify-content: center;
