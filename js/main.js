@@ -1,4 +1,4 @@
-import { getCart, showCart, updateCartCount } from "./components/cart.js";
+import { getCart, openCart, showCart, updateCartCount } from "./components/cart.js";
 import { confirmPurchase, showCheckout } from "./components/checkout.js";
 import { fetchProducts, initProducts, logout, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
@@ -25,6 +25,7 @@ const init = async () => {
         const products = await fetchProducts();
         renderDropdownCategories(categoriesData);
         showProducts(products);
+        openCart()
         initProducts();
         
     }
