@@ -1,5 +1,4 @@
 import { API_URL } from '../../config/config.js';
-// import { productsData } from '../data/data.js';
 import { addProductToCart } from './cart.js';
 
 export function showNameCustomer(name) {
@@ -8,6 +7,18 @@ export function showNameCustomer(name) {
         navbarDiv.innerHTML = `
         <p>Hola, <strong>${name}</strong></p>
         `;
+    }
+}
+
+export async function fetchCategories(){
+    try {
+        const res = await fetch(`${API_URL}/api/categories`);
+        const categories = await res.json();
+        return categories
+        
+    } catch (error) {
+        console.error('Error trayendo categorias:', error.message);
+        
     }
 }
 
@@ -31,7 +42,7 @@ export async function fetchAllProducts() {
         const products = await res.json();
         return products.data;
     } catch (err) {
-        console.error('Error:', err.message);
+        console.error('Error trayendo productos:', err.message);
     }
 }
 export async function fetchProducts() {
@@ -122,13 +133,10 @@ export function logout() {
     }    
 }
 
-// ---- buscador
 
 const searchInput = document.getElementById("searchInput");
-const searchBtn = document.getElementById("searchBtn");
-
 export const searchProducts = (productsData) => {
-    searchBtn.addEventListener("click", () => {
+    searchInput.addEventListener("keyup", () => {
         const query = searchInput.value.trim().toLowerCase();
         const filteredProducts = productsData.filter(product => product.name.toLowerCase().includes(query));
         showProducts(filteredProducts);
