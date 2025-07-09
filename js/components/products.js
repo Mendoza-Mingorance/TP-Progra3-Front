@@ -28,54 +28,64 @@ export function renderDropdownCategories(categories) {
 
     select.innerHTML = '<option value="">-- Selecciona categoría --</option>';
 
-    categories.forEach(c => {
+    categories.forEach(category => {
         const option = document.createElement('option');
-        option.value = c.id;
-        option.textContent = c.name;
+        option.value = category.name;
+        option.textContent = category.name;
         select.appendChild(option);
     });
 }
 
-export async function fetchAllProducts() {
+// export async function fetchAllProducts() {
+//     try {
+//         const res = await fetch(`${API_URL}/api/products`);
+//         const products = await res.json();
+//         return products.data;
+//     } catch (err) {
+//         console.error('Error trayendo productos:', err.message);
+//     }
+// }
+
+// export async function fetchProducts() {
+//     const category = document.getElementById('categorySelect').value;
+//     const minPrice = document.getElementById('minPrice').value;
+//     const maxPrice = document.getElementById('maxPrice').value;
+//     const sort = document.getElementById('sortSelect').value;
+//     const order = document.getElementById('orderSelect').value;
+
+//     const queryParams = new URLSearchParams();
+//     queryParams.append('available', 'active');
+//     if (category) queryParams.append('id_category', category);
+//     if (minPrice) queryParams.append('minPrice', minPrice);
+//     if (maxPrice) queryParams.append('maxPrice', maxPrice);
+//     if (sort) queryParams.append('sort', sort);
+//     if (order) queryParams.append('order', order);
+
+//     const url = `${API_URL}/api/products?${queryParams.toString()}`;
+//     console.log(url);
+    
+//     try {
+//         const res = await fetch(url);
+//         const products = await res.json();
+//         console.log(products);
+//         console.log(products.data);
+        
+//         return products.data
+//     } catch (err) {
+//         console.error('Error:', err.message);
+//     }
+// }
+
+export async function fetchProducts() {
     try {
         const res = await fetch(`${API_URL}/api/products`);
         const products = await res.json();
-        return products.data;
-    } catch (err) {
-        console.error('Error trayendo productos:', err.message);
-    }
-}
-export async function fetchProducts() {
-    const category = document.getElementById('categorySelect').value;
-    const minPrice = document.getElementById('minPrice').value;
-    const maxPrice = document.getElementById('maxPrice').value;
-    const sort = document.getElementById('sortSelect').value;
-    const order = document.getElementById('orderSelect').value;
-
-    const queryParams = new URLSearchParams();
-    queryParams.append('available', 'active');
-    if (category) queryParams.append('id_category', category);
-    if (minPrice) queryParams.append('minPrice', minPrice);
-    if (maxPrice) queryParams.append('maxPrice', maxPrice);
-    if (sort) queryParams.append('sort', sort);
-    if (order) queryParams.append('order', order);
-
-    const url = `${API_URL}/api/products?${queryParams.toString()}`;
-    console.log(url);
-    
-    try {
-        const res = await fetch(url);
-        const products = await res.json();
-        console.log(products);
-        console.log(products.data);
-        
         return products.data
-    } catch (err) {
-        console.error('Error:', err.message);
+    } catch (error) {
+        console.error('Error trayendo productos:', error.message); 
     }
 }
-
-export function showProducts(arr) {
+function showProducts(arr) {
     let container = document.querySelector('.container-products');
 
     if (!arr.length) {
@@ -106,21 +116,65 @@ export function showProducts(arr) {
     }
 }
 
-export function initProducts() {
+function filterByCategory(products, category) {
+    if (!category) return products;
+    return products.filter(p => p.category_name === category);
+}
+
+function sortByPrice(products, order) {
+    if (!order) return products;
+
+    const sorted = [...products];
+
+    if (order === 'asc') {
+        sorted.sort((a, b) => a.price - b.price);
+    } else {
+        sorted.sort((a, b) => b.price - a.price);
+    }
+
+    return sorted;
+}
+
+export function initProducts(productsData) {
     const categorySelect = document.getElementById('categorySelect');
+    const orderSelect = document.getElementById('orderSelect');
+
+    let currentCategory = null;
+    let currentOrder = null;
+
+    function renderProducts() {
+        const filtered = filterByCategory(productsData, currentCategory);
+        const sorted = sortByPrice(filtered, currentOrder);
+        showProducts(sorted);
+    }
 
     if (categorySelect) {
-        categorySelect.addEventListener('change', function () {
-            const selectedId = Number(this.value);
-            if (selectedId) {
-                const productosFiltrados = productsData.filter(p => p.id_category === selectedId);
-                showProducts(productosFiltrados);
-            } else {
-                showProducts(productsData);
-            }
+        categorySelect.addEventListener('change', (e) => {
+            currentCategory = e.target.value;
+            renderProducts();
         });
     }
+
+    if (orderSelect) {
+        orderSelect.addEventListener('change', (e) => {
+            currentOrder = e.target.value;
+            renderProducts();
+        });
+    }
+
+    renderProducts();
 }
+
+const searchInput = document.getElementById("searchInput");
+export const searchProducts = (productsData) => {
+    searchInput.addEventListener("keyup", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const filteredProducts = productsData.filter(product => product.name.toLowerCase().includes(query));
+        showProducts(filteredProducts);
+    });
+} 
+
+
 
 export function logout() {
     const logoutBtn = document.getElementById('logoutBtn');
@@ -132,13 +186,3 @@ export function logout() {
         });
     }    
 }
-
-
-const searchInput = document.getElementById("searchInput");
-export const searchProducts = (productsData) => {
-    searchInput.addEventListener("keyup", () => {
-        const query = searchInput.value.trim().toLowerCase();
-        const filteredProducts = productsData.filter(product => product.name.toLowerCase().includes(query));
-        showProducts(filteredProducts);
-    });
-} 

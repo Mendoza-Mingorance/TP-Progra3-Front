@@ -1,6 +1,6 @@
 import { getCart, openCart, showCart, updateCartCount } from "./components/cart.js";
 import { confirmPurchase, showCheckout } from "./components/checkout.js";
-import { fetchCategories, fetchProducts, initProducts, logout, renderDropdownCategories, searchProducts, showNameCustomer, showProducts } from "./components/products.js";
+import { fetchCategories, fetchProducts, initProducts, logout, renderDropdownCategories, searchProducts, showNameCustomer } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
 import { getDataLocalStorage } from "./utils/localstorage.js";
 import { darkTheme } from "./utils/theme.js";
@@ -25,11 +25,10 @@ const init = async () => {
         const products = await fetchProducts();
         const categories = await fetchCategories();
         renderDropdownCategories(categories);
-        showProducts(products);
+        initProducts(products);
         openCart();
         searchProducts(products);
-        initProducts();
-        
+          
     }
 
     if (path.includes('cart.html')) {
