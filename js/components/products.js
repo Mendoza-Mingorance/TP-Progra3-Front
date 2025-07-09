@@ -1,5 +1,5 @@
 import { API_URL } from '../../config/config.js';
-import { categoriesData, productsData } from '../data/data.js';
+// import { productsData } from '../data/data.js';
 import { addProductToCart } from './cart.js';
 
 export function showNameCustomer(name) {
@@ -31,7 +31,7 @@ export async function fetchAllProducts() {
         const products = await res.json();
         return products.data;
     } catch (err) {
-        console.error('Error:', err);
+        console.error('Error:', err.message);
     }
 }
 export async function fetchProducts() {
@@ -60,7 +60,7 @@ export async function fetchProducts() {
         
         return products.data
     } catch (err) {
-        console.error('Error:', err);
+        console.error('Error:', err.message);
     }
 }
 
@@ -75,9 +75,7 @@ export function showProducts(arr) {
     container.innerHTML = '';
 
     for (let i = 0; i < arr.length; i++) {
-        const p = arr[i];
-        // let categories = categoriesData.find(c => c.id === p.id_category);
-        // let categoryName = categories ? categories.name : 'Sin Categoria'; --> estas lineas ya las podemos borrar ya que no estamos usando los productos hardcodeados. Ante la duda las dejo comentadas por si te rompe algo, pero por como tenemos armada la base, con ${p.category_name} obtenemos la categoría de cada producto desde la base de datos(mas abajo hago esa modificacion). Si ya es asi, tambien podriamos borrar la carpeta data directamente. 
+        const p = arr[i]; 
 
         let listProducts = document.createElement('div');
         listProducts.className = 'card-product';
@@ -123,3 +121,16 @@ export function logout() {
         });
     }    
 }
+
+// ---- buscador
+
+const searchInput = document.getElementById("searchInput");
+const searchBtn = document.getElementById("searchBtn");
+
+export const searchProducts = (productsData) => {
+    searchBtn.addEventListener("click", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        const filteredProducts = productsData.filter(product => product.name.toLowerCase().includes(query));
+        showProducts(filteredProducts);
+    });
+} 

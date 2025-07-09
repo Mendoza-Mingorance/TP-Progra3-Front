@@ -138,11 +138,14 @@ nav ul li a{
     align-items: center;
     gap: 1rem;
 }
+
 .cart{
   position: relative;
 }
+
 #cart-btn{
-  font-size: 1.25rem;
+  font-size: 1.7rem;
+  cursor: pointer;
   border: none;
   background-color: transparent;
   border-radius: 50%;
