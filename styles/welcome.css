@@ -19,8 +19,7 @@
     bottom: 0;
     height: 100%;
     width: 100%;
-    background-color: var(--bg-color);
-    opacity: 50%;
+    background-color: rgba(var(--bg-mask-color), var(--bg-mask-opacity));
 }
 .welcome-bg-img {
     position: absolute;

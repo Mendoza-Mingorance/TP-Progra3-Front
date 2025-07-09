@@ -36,51 +36,11 @@ export function renderDropdownCategories(categories) {
     });
 }
 
-// export async function fetchAllProducts() {
-//     try {
-//         const res = await fetch(`${API_URL}/api/products`);
-//         const products = await res.json();
-//         return products.data;
-//     } catch (err) {
-//         console.error('Error trayendo productos:', err.message);
-//     }
-// }
-
-// export async function fetchProducts() {
-//     const category = document.getElementById('categorySelect').value;
-//     const minPrice = document.getElementById('minPrice').value;
-//     const maxPrice = document.getElementById('maxPrice').value;
-//     const sort = document.getElementById('sortSelect').value;
-//     const order = document.getElementById('orderSelect').value;
-
-//     const queryParams = new URLSearchParams();
-//     queryParams.append('available', 'active');
-//     if (category) queryParams.append('id_category', category);
-//     if (minPrice) queryParams.append('minPrice', minPrice);
-//     if (maxPrice) queryParams.append('maxPrice', maxPrice);
-//     if (sort) queryParams.append('sort', sort);
-//     if (order) queryParams.append('order', order);
-
-//     const url = `${API_URL}/api/products?${queryParams.toString()}`;
-//     console.log(url);
-    
-//     try {
-//         const res = await fetch(url);
-//         const products = await res.json();
-//         console.log(products);
-//         console.log(products.data);
-        
-//         return products.data
-//     } catch (err) {
-//         console.error('Error:', err.message);
-//     }
-// }
-
 export async function fetchProducts() {
     try {
-        const res = await fetch(`${API_URL}/api/products`);
-        const products = await res.json();
-        return products.data
+        const res = await fetch(`${API_URL}/api/products/active`);
+        const products = await res.json();        
+        return products
     } catch (error) {
         console.error('Error trayendo productos:', error.message); 
     }
