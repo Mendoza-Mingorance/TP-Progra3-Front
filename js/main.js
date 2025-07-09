@@ -1,8 +1,7 @@
 import { getCart, openCart, showCart, updateCartCount } from "./components/cart.js";
 import { confirmPurchase, showCheckout } from "./components/checkout.js";
-import { fetchProducts, initProducts, logout, renderDropdownCategories, showNameCustomer, showProducts } from "./components/products.js";
+import { fetchCategories, fetchProducts, initProducts, logout, renderDropdownCategories, searchProducts, showNameCustomer } from "./components/products.js";
 import { welcomeFunction } from "./components/welcome.js";
-import { categoriesData } from "./data/data.js";
 import { getDataLocalStorage } from "./utils/localstorage.js";
 import { darkTheme } from "./utils/theme.js";
 
@@ -14,6 +13,7 @@ const init = async () => {
     showNameCustomer(customerName);
     updateCartCount();
     logout();
+    
 
     const path = window.location.pathname;
     
@@ -23,18 +23,21 @@ const init = async () => {
     
     if (path.includes('products.html')) {
         const products = await fetchProducts();
-        renderDropdownCategories(categoriesData);
-        showProducts(products);
-        openCart()
-        initProducts();
-        
+        const categories = await fetchCategories();
+        renderDropdownCategories(categories);
+        initProducts(products);
+        openCart();
+        searchProducts(products);
+          
     }
 
     if (path.includes('cart.html')) {
+        openCart();
         showCart(getCart()); 
     }
 
     if (path.includes('checkout.html')) {
+        openCart();
         showCheckout(getCart());
         confirmPurchase(customerName, getCart());
     }

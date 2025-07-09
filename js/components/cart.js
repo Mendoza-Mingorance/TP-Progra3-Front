@@ -1,12 +1,12 @@
-// import { productsData } from '../data/data.js';
-import { fetchAllProducts } from './products.js';
+
+import { fetchProducts } from './products.js';
 import { getDataLocalStorage, uploadDataLocalStorage } from '../utils/localstorage.js';
 import { showToast } from '../utils/toast.js';
 import { API_URL } from '../../config/config.js';
 
 let cart = getDataLocalStorage('cart') || [];
 export async function addProductToCart(id) {
-    const products = await fetchAllProducts()
+    const products = await fetchProducts()
     const product = products.find(p => p.id === id);
 
     if (!product) {
