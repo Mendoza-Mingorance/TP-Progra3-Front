@@ -24,6 +24,10 @@ const init = async () => {
     if (path.includes('products.html')) {
         const products = await fetchProducts();
         const categories = await fetchCategories();
+        console.log(categories);
+        console.log(products);
+        
+        
         renderDropdownCategories(categories);
         initProducts(products);
         openCart();

@@ -38,9 +38,10 @@ export function renderDropdownCategories(categories) {
 
 export async function fetchProducts() {
     try {
-        const res = await fetch(`${API_URL}/api/products/active`);
-        const products = await res.json();        
-        return products
+        const res = await fetch(`${API_URL}/api/products`);
+        const products = await res.json(); 
+
+        return products.data.filter(p => p.available === 'active')
     } catch (error) {
         console.error('Error trayendo productos:', error.message); 
     }
