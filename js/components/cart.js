@@ -80,7 +80,7 @@ export function showCart(cart) {
         productContainer.classList.add('cart-item');
 
         productContainer.innerHTML = `
-            <img src="${API_URL}/uploads/${product.url_image}" alt="${product.name}" class="cart-item-image" />
+            <img src="${product.url_image}" alt="${product.name}" class="cart-item-image" />
             <div class="cart-item-details">
                 <h3>${product.name}</h3>
                 <p>Precio: $${Number(product.price).toFixed(2)}</p>
