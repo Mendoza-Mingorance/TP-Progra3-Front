@@ -62,7 +62,7 @@ function showProducts(arr) {
         let listProducts = document.createElement('div');
         listProducts.className = 'card-product';
         listProducts.innerHTML = `
-            <img src="${API_URL}/uploads/${p.url_image}" alt="${p.name}">
+            <img src="${p.url_image}" alt="${p.name}">
             <h3>${p.name}</h3>
             <p><i class="fas fa-dollar-sign"></i> ${p.price}</p>
             <p><i class="fas fa-tag"></i> ${p.category_name}</p>
